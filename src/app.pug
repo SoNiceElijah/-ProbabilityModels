@@ -1,0 +1,44 @@
+body
+    head
+        title LABS
+        script(src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js")
+        script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js")
+        style
+            include ./app.css
+    body
+        .big-center
+            .header
+                .variant Вариант 16
+                .info Задание
+                    .info-panel
+                        h1 Задание
+                        p К светофору по некоторому направлению подъезжают машины с интенсивностью λ. С.в. η — число машин, прибывших за t секунд, распределена по закону Пуассона с параметром λt.
+            .center
+                .left-panel
+                    .form
+                        .form-name Введите <b>&lambda;</b>
+                        input#lambda(type="text", value="2")
+                    .form
+                        .form-name Введите <b>t</b>
+                        input#time(type="text", value="5")
+                    .form
+                        .form-name Несколько повторений?
+                        input#repeat(type="text", value="1")
+
+                    .buttons
+                        .button.submit#gen Генерировать
+                        .button.clear#clr Перезагрузить
+                                    
+                .right-panel
+                    .chart-panel
+                        canvas#canvas.chart
+
+                    .generated-table
+                        each val in table
+                            .table-item(id=val)
+                                .table-head= val 
+                                .table-val 0
+                                .table-probability 0
+
+        script
+            include ./app.js

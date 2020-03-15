@@ -1,0 +1,23 @@
+{
+  "name": "probabilitymodels",
+  "version": "1.0.0",
+  "description": "",
+  "main": "labs.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SoNiceElijah/ProbabilityModels.git"
+  },
+  "author": "SoNiceElijah",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SoNiceElijah/ProbabilityModels/issues"
+  },
+  "homepage": "https://github.com/SoNiceElijah/ProbabilityModels#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pug": "^2.0.4"
+  }
+}
