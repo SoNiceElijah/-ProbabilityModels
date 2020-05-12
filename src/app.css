@@ -13,34 +13,44 @@ body {
 }
 
 .center {
-    background: #ffffff;
     width: 850px;
-    height: 450px;
+}
 
-    overflow: hidden;
+.big-center {
+    padding: 50px 0 150px 0;
 }
 
 .left-panel {
+
+    background: #ffffff;
+
     width: 210px;
-    height: calc(100% - 40px);
+    height: 410px;
 
     padding: 20px;
 
-    float: left;
 
-    position: relative;
+    position: fixed;
+    left: 120px;
+
+    border-right: 1px solid #e6e6e6;
 }
 
 .right-panel {
-    width: 559px;
-    height: calc(100% - 40px);
+    background: #ffffff;
+
+    width: 810px;
+    height: 410px;
 
     padding: 20px;
 
-    border-left: 1px solid #e6e6e6;
-
-    float: right;
     
+
+    
+}
+
+.second-panel {
+    border-top: 1px solid #e6e6e6;
 }
 
 .form {
@@ -136,17 +146,36 @@ body {
     padding-bottom: 20px;
 }
 
-.generated-table {
-    width: 100%;
-    height: 90px;
+.chart-panel {
+    height: 410px;
+}
 
-    margin-top: 40px;
-    margin-left: 5px;
+.chart-panel canvas {
+    height: 100%;
+}
+
+.generated-table {
+    width: 767px;
+
+    margin: auto;
+
+}
+
+.first-panel {
+    width: 850px;
+    overflow: hidden;
+
+    position: relative;
+}
+
+.second-panel {
+    background: #ffffff;
+    padding: 20px 0 20px 0;
 }
 
 .table-item {
     display: inline-block;
-    width: 55px;
+    width: 59px;
 
     cursor: pointer;
 }
@@ -155,7 +184,7 @@ body {
     background: #b4b8b3;
 }
 
-.table-head, .table-val, .table-probability {
+.table-head, .table-val, .table-probability, .table-probability-real, .table-probability-abs {
     height: 30px;
     width: 100%;
 
@@ -176,7 +205,7 @@ body {
     background: #eceae9;
 }
 
-.table-probability {
+.table-probability, .table-probability-real, .table-probability-abs {
     background: #eceae9;
     overflow: hidden;
 
@@ -245,4 +274,118 @@ body {
 .info:hover .info-panel {
     display: block;
 }
+
+.seed-button {
+    margin-top: -40px;
+    width: 50px;
+
+    margin-left: 160px;
+}
+
+.seed-form input{
+    width: 150px;
+}
+
+.generated-table-stat {
+    width: 590px;
+    margin: auto;
+}
+
+.third-panel {
+    padding: 20px 0 20px 0;
+    background: #ffffff;
+    border-top: 1px solid #e6e6e6;
+}
+
+.table-head b {
+    font-weight: 400;
+    text-decoration: overline;
+
+    line-height: 30px;
+}
+
+
+.table-head sup {
+    line-height: 20px;
+}
+
+.fourth-panel  {
+    border-top: 1px solid #e6e6e6;
+}
+
+.table-item[max-error="max-error"] .table-head
+{
+    background: #cf7b7b ;
+}
+
+.fifth-panel {
+    background: #ffffff;
+    padding: 20px 40px 20px 40px;
+
+    border-top: 1px solid #e6e6e6;
+    overflow: hidden;
+}
+
+.fifth-panel .form {
+    display: inline-block;
+    width: 100px;
+}
+
+.left-space {
+    margin-left: 10px;
+}
+
+.fifth-panel input {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 16px;
+
+    padding: 5px;
+    border-radius: 3px;
+
+    border: 1px solid #cdcdcd;
+    outline: none;
+}
+
+.fifth-panel .button {
+    float: right;
+    margin-top: 20px;
+}
+
+.sixth-panel  {
+
+    border-top: 1px solid #e6e6e6;
+    background: #ffffff;
+
+    padding: 20px 40px 20px 40px;
+
+}
+
+
+.sixth-panel  input {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 16px;
+
+    padding: 5px;
+
+    width: 143px;
+
+    border: none;
+
+    border: 1px solid #adadad;
+    margin-right: 10px;
+    margin-top: 10px;
+
+    outline: none;
+}
+
+.seventh-panel {
+    padding: 20px;
+    background: #ffffff;
+}
+
+.eigthth-panel {
+    background: #ffffff;
+    padding: 20px 40px 20px 40px;
+}
+
 

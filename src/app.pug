@@ -3,6 +3,7 @@ body
         title LABS
         script(src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js")
         script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js")
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/2.3.10/seedrandom.min.js")
         style
             include ./app.css
     body
@@ -14,31 +15,103 @@ body
                         h1 Задание
                         p К светофору по некоторому направлению подъезжают машины с интенсивностью λ. С.в. η — число машин, прибывших за t секунд, распределена по закону Пуассона с параметром λt.
             .center
-                .left-panel
-                    .form
-                        .form-name Введите <b>&lambda;</b>
-                        input#lambda(type="text", value="2")
-                    .form
-                        .form-name Введите <b>t</b>
-                        input#time(type="text", value="5")
-                    .form
-                        .form-name Несколько повторений?
-                        input#repeat(type="text", value="1")
+                .first-panel
+                    .left-panel#leftOneBig
+                        .form
+                            .form-name Введите <b>&lambda;</b>
+                            input#lambda(type="text", value="2")
+                        .form
+                            .form-name Введите <b>t</b>
+                            input#time(type="text", value="5")
+                        .form
+                            .form-name Несколько повторений?
+                            input#repeat(type="text", value="1")
+                        .form.seed-form
+                            .form-name Зерно
+                            input#seeds(type="text", value="1")
+                        .button.submit.seed-button#seed +
 
-                    .buttons
-                        .button.submit#gen Генерировать
-                        .button.clear#clr Перезагрузить
-                                    
-                .right-panel
-                    .chart-panel
-                        canvas#canvas.chart
+                        .buttons
+                            
+                            .button.submit#gen Генерировать
+                            .button.clear#clr Перезагрузить
+                                        
+                    .right-panel
+                        .chart-panel
+                            canvas#canvas.chart
 
+                .second-panel
                     .generated-table
                         each val in table
                             .table-item(id=val)
                                 .table-head= val 
                                 .table-val 0
-                                .table-probability 0
+                                .table-probability 0     
+                                .table-probability-real 0
+                                .table-probability-abs 0      
 
+                .fourth-panel 
+                    .right-panel
+                        .chart-panel
+                            canvas#statChart.chart
+
+                .third-panel
+                    .generated-table-stat
+                        .table-item#tabEeta
+                            .table-head E&eta;
+                            .table-val 0
+                        .table-item#tabXoverlined
+                            .table-head
+                                b x
+                            .table-val 0
+                        .table-item#tabEetaAbs
+                            .table-head | E&eta; - <b>x</b> |
+                            .table-val 0
+                        .table-item#tabDeta
+                            .table-head D&eta;
+                            .table-val 0
+                        .table-item#tabS2
+                            .table-head S<sup>2</sup>
+                            .table-val 0
+                        .table-item#tabDAbs
+                            .table-head |D&eta;-S<sup>2</sup>|
+                            .table-val 0
+                        .table-item#tabMe
+                            .table-head Me
+                            .table-val 0
+                        .table-item#tabR
+                            .table-head R
+                            .table-val 0
+                        .table-item#tabD
+                            .table-head D
+                            .table-val 0
+                        .table-item#tabMAX
+                            .table-head MAX
+                            .table-val 0
+                .fifth-panel
+                    .form
+                        .form-name Параметр <b>k</b>
+                        input#k(type="text", value="5")
+                    .form.left-space
+                        .form-name Параметр <b>&alpha;</b>
+                        input#alpha(type="text", value="0.01") 
+
+                    .button.submit#calculate Посчитать
+
+                .sixth-panel#zInputs
+                .seventh-panel
+                    .generated-table#qTable
+
+                .eigthth-panel
+                    .generated-table-last
+                        .table-item#tabR0
+                            .table-head R<sub>0</sub>
+                            .table-val 0
+                        .table-item#tabFR0
+                            .table-head 1-F(R<sub>0</sub>)
+                            .table-val 0
+                        .table-item#tabRes
+                            .table-head H<sub>0</sub>
+                            .table-val -
         script
             include ./app.js
