@@ -36,14 +36,6 @@ document.getElementById('time').onkeyup = () => {
     draw() ;
 }
 
-$('.second-panel .table-item').mouseover(e => {
-    draw(e.currentTarget.id);
-})
-
-$('.second-panel .generated-table').mouseleave(e => {
-    draw(-1);
-})
-
 let myChart;
 let statChart;
 let bigOne = []
@@ -56,7 +48,7 @@ for(let i = start; i < size; ++i)
 
 draw();
 
-function draw(idx = -1) {
+function draw() {
 
 
     let borderForGraph = [];
@@ -69,132 +61,64 @@ function draw(idx = -1) {
         dataForGraph.push(PoissonDistribution(i));
         dataForFunc.push(FunctionTeor(i))
 
-        labelsForGraph.push(i + '');
+        labelsForGraph.push(i);
 
-        if(i == idx)
-        {
-            borderForGraph.push('#386685');
-            colorForGraph.push('#2380be');
-        }
-        else
-        {
-            borderForGraph.push('#cfcfcf');
-            colorForGraph.push('#e5e5e5');
-        }
+
+        borderForGraph.push('#cfcfcf');
+        colorForGraph.push('#e5e5e5');
+
     }
 
-    if(!myChart)
-    {
-        let ctx = document.getElementById('canvas').getContext('2d');
-        document.getElementById('canvas').height = 410 + 'px';
-        myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: labelsForGraph,
-                datasets: [{
-                    label: 'distribution',
-                    data: dataForGraph,
-                    borderWidth: 1,
-                    backgroundColor : colorForGraph,
-                    borderColor : borderForGraph
-                },
-                {
-                    label: 'real',
-                    data: bigOne,
-                    borderWidth: 1,
-                    backgroundColor : '#71d358',
-                    borderColor : '#51944b'
-                }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                },
-                legend: {
-                    display: false
-                },
-                tooltips: {
-                    callbacks: {
-                       label: function(tooltipItem) {
-                              return tooltipItem.yLabel;
-                       }
-                    },
-                    responsive : false
-                },
-            }
-        });
+    const layout = {
+        autosize: false,
+        width: document.getElementById('canvas').clientWidth,
+        height: document.getElementById('canvas').clientHeight,
+        paper_bgcolor: '#ffffff',
+        plot_bgcolor: '#ffffff',
+        margin: {
+            l: 70,
+            r: 30,
+            b: 50,
+            t: 50,
+            pad: 4
+          },
     }
-    else
-    {
-        myChart.data.datasets[0].data = dataForGraph;
-        myChart.data.datasets[0].backgroundColor = colorForGraph;
-        myChart.data.datasets[0].borderColor = borderForGraph;
 
-        myChart.data.datasets[1].data = bigOne;
-
-        myChart.update();
-    }  
-
-    if(!statChart)
-    {
-        let ctx = document.getElementById('statChart').getContext('2d');
-        document.getElementById('statChart').height = 410 + 'px';
-        statChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: labelsForGraph,
-                datasets: [{
-                    label: 'distribution',
-                    data: dataForFunc,
-                    borderWidth: 1,
-                    backgroundColor : colorForGraph,
-                    borderColor : borderForGraph
-                },
-                {
-                    label: 'real',
-                    data: bigTwo,
-                    borderWidth: 1,
-                    backgroundColor : '#71d358',
-                    borderColor : '#51944b'
-                }]
-            },
-            options: {
-                fill: "false",
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                },
-                legend: {
-                    display: false
-                },
-                tooltips: {
-                    callbacks: {
-                       label: function(tooltipItem) {
-                              return tooltipItem.yLabel;
-                       }
-                    },
-                    responsive : false
-                },
-            }
-        });
+    let data1 = {
+        x: labelsForGraph,
+        y : dataForGraph, 
+        type : 'bar', 
+        name : "Теория"
     }
-    else
-    {
-        statChart.data.datasets[0].data = dataForFunc;
-        statChart.data.datasets[0].backgroundColor = colorForGraph;
-        statChart.data.datasets[0].borderColor = borderForGraph;
 
-        statChart.data.datasets[1].data = bigTwo;
+    let data2 = {
+        x: labelsForGraph,
+        y : bigOne, 
+        type : 'bar', 
+        name : "Практика"
+    }
 
-        statChart.update();
-    }  
+    Plotly.newPlot(document.getElementById('canvas'),[data1,data2],layout);
+
+    let data3 = {
+        x: labelsForGraph,
+        y : dataForFunc, 
+        type : 'line', 
+        mode : 'lines',
+        name : "Теория",
+        line : { shape : 'hv' }
+    }
+
+    let data4 = {
+        x: labelsForGraph,
+        y : bigTwo, 
+        type : 'line', 
+        mode : 'lines',
+        name : "Практика",
+        line : { shape : 'hv' }
+    }
+
+    Plotly.newPlot(document.getElementById('statChart'),[data3,data4],layout);
     
 }
 
@@ -328,9 +252,10 @@ function generate(repeat)
     draw();
     CalculateStat();
 
+
     setTimeout(() => {
         generate(repeat - 1);
-    }, 5);
+    }, 20);
 
 }
 
@@ -385,7 +310,8 @@ function FunctionReal(k)
 }
 
 function factorial(n) {
-    if(n === 0)
+
+    if(n == 0)
         return 1;
 
     return factorial(n-1) * n;
@@ -482,11 +408,9 @@ function CalculateStat()
 
     let Dd = Number.MIN_SAFE_INTEGER;
     
-    for(let j = 1; j < arr.length; ++j)
+    for(let j = 0; j < size; ++j)
     {
-        Dd = Math.max(Dd,
-            (j/arr.length) - FunctionTeor(arr[j]),
-            FunctionTeor(arr[j]) - (j-1)/arr.length);
+        Dd = Math.max(Dd,Math.abs(FunctionReal(j)-FunctionTeor(j)));
     }
 
     $('#tabD .table-val').html(Dd.toFixed(3));
@@ -688,7 +612,7 @@ function Complecated(x,r)
 
 function Gamma(r)
 {
-    r = parseInt(r);
+    r = parseFloat(r);
 
     let res = 1;
     while(r != 0.5 && r != 1)

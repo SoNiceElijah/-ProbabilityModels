@@ -4,6 +4,7 @@ body
         script(src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js")
         script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js")
         script(src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/2.3.10/seedrandom.min.js")
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
         style
             include ./app.css
     body
@@ -38,7 +39,7 @@ body
                                         
                     .right-panel
                         .chart-panel
-                            canvas#canvas.chart
+                            #canvas.chart
 
                 .second-panel
                     .generated-table
@@ -53,7 +54,7 @@ body
                 .fourth-panel 
                     .right-panel
                         .chart-panel
-                            canvas#statChart.chart
+                            #statChart.chart
 
                 .third-panel
                     .generated-table-stat
